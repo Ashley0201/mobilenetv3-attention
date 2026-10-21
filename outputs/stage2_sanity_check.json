@@ -1,0 +1,35 @@
+{
+  "device": "cuda",
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "torch": "2.14.1+cu130",
+  "cuda": "13.0",
+  "forward_backward": {
+    "logits_shape": [
+      16,
+      10
+    ],
+    "loss": 2.2933387756347656,
+    "grad_norm": 4.662673473358154,
+    "finite_logits": true,
+    "finite_grads": true
+  },
+  "single_batch": {
+    "losses": [
+      2.4052982330322266,
+      1.491423487663269,
+      0.8544949293136597,
+      0.47038722038269043,
+      0.24098588526248932
+    ],
+    "first": 2.4052982330322266,
+    "last": 0.24098588526248932
+  },
+  "overfit": {
+    "samples": 200,
+    "steps": 60,
+    "final_train_accuracy": 1.0,
+    "final_loss": 0.009682610630989075,
+    "duration_s": 27.958992199972272
+  },
+  "peak_memory_mib": 1668.4384765625
+}

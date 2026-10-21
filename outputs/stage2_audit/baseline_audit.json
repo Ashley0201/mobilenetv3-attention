@@ -1,0 +1,190 @@
+{
+  "checkpoint": {
+    "best_epoch": 12,
+    "best_metrics": {
+      "val_accuracy": 0.9694,
+      "val_loss": 0.5726907095909118,
+      "val_f1_macro": 0.9694005361546918,
+      "train_accuracy": 0.9970222222222223
+    },
+    "last_epoch": 14,
+    "has_optimizer_state": true,
+    "has_scheduler_state": true,
+    "state_dict_tensors": 312,
+    "classifier_shape": [
+      10,
+      1280
+    ],
+    "seed": 42,
+    "deterministic": true,
+    "pretrained": "imagenet1k_v1",
+    "num_classes": 10,
+    "config_sections": [
+      "data",
+      "dataset",
+      "evaluation",
+      "experiment",
+      "model",
+      "training"
+    ],
+    "scheduler_in_config": false,
+    "checkpoint_size_mib": 48.543063163757324,
+    "model_size_mib": 16.171775817871094,
+    "relative_l2_to_official_weights": {
+      "features.0.0.weight": 0.011937648989260197,
+      "features.4.block.0.0.weight": 0.0334237739443779,
+      "features.16.0.weight": 0.13691481947898865
+    },
+    "official_weights_sha256": "8738ca797c879b547d18bbd15da5736ff2557b2036a9af72225393ca61759a04"
+  },
+  "split": {
+    "train_size": 45000,
+    "val_size": 5000,
+    "overlap": 0,
+    "train_indices_sha256": "439d2886be7d934cfcf5add00aa6e368bb431dd849d6a130530d1dc7cee35480",
+    "val_indices_sha256": "6781efc5c7c0ad15f37adeac39dfdc1ba7cb6ad7a65e07d775bd3aec67050a12",
+    "recompute_identical": true,
+    "val_class_counts": [
+      500,
+      500,
+      500,
+      500,
+      500,
+      500,
+      500,
+      500,
+      500,
+      500
+    ]
+  },
+  "flops": {
+    "batch_size": 1,
+    "input_size": 224,
+    "total_flops": 430645120,
+    "total_macs": 215322560,
+    "breakdown": {
+      "aten.convolution": 428161920,
+      "aten.addmm": 2483200
+    },
+    "convention": "torch.utils.flop_counter 按 2×MACs 计；shape-based 理论值，非硬件实测"
+  },
+  "latency": {
+    "runs_ms": [
+      3.931457999860868,
+      4.282998000271618,
+      4.451389999594539,
+      4.264392000623047,
+      4.062001999700442
+    ],
+    "mean_ms": 4.198448000010103,
+    "stdev_ms": 0.20333355606922573,
+    "min_ms": 3.931457999860868,
+    "max_ms": 4.451389999594539,
+    "median_ms": 4.264392000623047,
+    "protocol": "batch=1, 224×224, FP32, eval(), no_grad, warmup=10, repeats=50, CUDA sync"
+  },
+  "eca_overhead_estimate": {
+    "insertion": "after depthwise conv, before projection conv, only blocks without SE",
+    "block_indices": [
+      1,
+      2,
+      3,
+      7,
+      8,
+      9,
+      10
+    ],
+    "blocks": [
+      {
+        "block_index": 1,
+        "channels": 16,
+        "spatial": [
+          112,
+          112
+        ],
+        "kernel": 3,
+        "params": 3,
+        "macs": 200752,
+        "flops_2x_macs": 401504
+      },
+      {
+        "block_index": 2,
+        "channels": 64,
+        "spatial": [
+          56,
+          56
+        ],
+        "kernel": 3,
+        "params": 3,
+        "macs": 200896,
+        "flops_2x_macs": 401792
+      },
+      {
+        "block_index": 3,
+        "channels": 72,
+        "spatial": [
+          56,
+          56
+        ],
+        "kernel": 3,
+        "params": 3,
+        "macs": 226008,
+        "flops_2x_macs": 452016
+      },
+      {
+        "block_index": 7,
+        "channels": 240,
+        "spatial": [
+          14,
+          14
+        ],
+        "kernel": 5,
+        "params": 5,
+        "macs": 48240,
+        "flops_2x_macs": 96480
+      },
+      {
+        "block_index": 8,
+        "channels": 200,
+        "spatial": [
+          14,
+          14
+        ],
+        "kernel": 5,
+        "params": 5,
+        "macs": 40200,
+        "flops_2x_macs": 80400
+      },
+      {
+        "block_index": 9,
+        "channels": 184,
+        "spatial": [
+          14,
+          14
+        ],
+        "kernel": 5,
+        "params": 5,
+        "macs": 36984,
+        "flops_2x_macs": 73968
+      },
+      {
+        "block_index": 10,
+        "channels": 184,
+        "spatial": [
+          14,
+          14
+        ],
+        "kernel": 5,
+        "params": 5,
+        "macs": 36984,
+        "flops_2x_macs": 73968
+      }
+    ],
+    "total_params": 29,
+    "total_macs": 790064,
+    "total_flops_2x_macs": 1580128,
+    "baseline_macs_from_counter": 215322560,
+    "overhead_ratio": 0.0036692114379468645,
+    "note": "解析计算，未实现模块；ECA 模块本身参数仅 1D conv 权重，无 bias。池化按 1 次加法/元素计，1D 卷积按 1 次乘加/输出计。"
+  }
+}

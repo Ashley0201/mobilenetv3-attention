@@ -1,0 +1,8 @@
+{"event": "start", "time": "2026-10-20T14:21:55.411266+00:00", "environment": {"python": "3.12.3", "python_executable": "C:\\Users\\Sylvia\\Desktop\\mobilenetv3-attention\\.venv\\Scripts\\python.exe", "platform": "Windows-11-10.0.26200-SP0", "torch": "2.14.1+cu130", "torchvision": "0.29.1+cu130", "torch_cuda": "13.0", "cudnn": 92400, "cuda_available": true, "device_count": 1, "gpu": {"name": "NVIDIA GeForce RTX 4060 Laptop GPU", "total_memory_mib": 8187, "capability": "8.9"}, "git_commit": null}, "device": "cuda"}
+{"event": "dataset", "train_size": 45000, "val_size": 5000, "test_size": 10000, "class_names": ["airplane", "automobile", "bird", "cat", "deer", "dog", "frog", "horse", "ship", "truck"], "class_to_idx": {"airplane": 0, "automobile": 1, "bird": 2, "cat": 3, "deer": 4, "dog": 5, "frog": 6, "horse": 7, "ship": 8, "truck": 9}, "train_class_counts": [4500, 4500, 4500, 4500, 4500, 4500, 4500, 4500, 4500, 4500], "val_class_counts": [500, 500, 500, 500, 500, 500, 500, 500, 500, 500]}
+{"event": "limit", "train_batches": 10}
+{"event": "model", "parameters": 4214842, "size_mb": 16.171775817871094, "pretrained": "none"}
+{"event": "epoch", "epoch": 0, "train_loss": 2.3112951278686524, "train_accuracy": 0.128125, "val_loss": 2.3048778772354126, "val_accuracy": 0.1171875, "val_f1_macro": 0.02097902097902098, "learning_rate": 1e-06, "duration_s": 4.22169129998656}
+{"event": "best", "epoch": 0, "val_accuracy": 0.1171875}
+{"event": "latency", "batch_size": 1, "input_size": 224, "warmup": 2, "repeats": 5, "latency_ms_per_batch": 5.002580001018941, "latency_ms_per_image": 5.002580001018941, "throughput_images_per_s": 199.89685318302094}
+{"event": "finish", "best_val_accuracy": 0.1171875, "finished_at": "2026-10-20T14:22:01.104581+00:00"}

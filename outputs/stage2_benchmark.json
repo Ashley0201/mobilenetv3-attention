@@ -1,0 +1,39 @@
+{
+  "model": "mobilenet_v3_large",
+  "num_classes": 10,
+  "pretrained": "imagenet1k_v1",
+  "device": "cuda",
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "parameters": 4214842,
+  "model_size_mib": 16.171775817871094,
+  "latency": {
+    "bs1": {
+      "batch_size": 1,
+      "input_size": 224,
+      "warmup": 10,
+      "repeats": 30,
+      "latency_ms_per_batch": 5.483283333402747,
+      "latency_ms_per_image": 5.483283333402747,
+      "throughput_images_per_s": 182.37248363735975
+    },
+    "bs16": {
+      "batch_size": 16,
+      "input_size": 224,
+      "warmup": 10,
+      "repeats": 30,
+      "latency_ms_per_batch": 6.764176666426162,
+      "latency_ms_per_image": 0.42276104165163514,
+      "throughput_images_per_s": 2365.4024412779813
+    },
+    "bs128": {
+      "batch_size": 128,
+      "input_size": 224,
+      "warmup": 10,
+      "repeats": 30,
+      "latency_ms_per_batch": 81.21205333348675,
+      "latency_ms_per_image": 0.6344691666678652,
+      "throughput_images_per_s": 1576.1207203367294
+    }
+  },
+  "train_peak_memory_mib_bs128_amp": 2898.95703125
+}

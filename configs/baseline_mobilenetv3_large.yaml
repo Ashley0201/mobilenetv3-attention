@@ -1,0 +1,47 @@
+# MobileNetV3-Large 基线训练配置（阶段 2，不包含注意力模块）
+experiment:
+  id: baseline_mobilenetv3_large_cifar10
+  seed: 42
+  deterministic: true
+  output_root: outputs
+
+model:
+  name: mobilenet_v3_large
+  num_classes: 10
+  # 必须显式声明预训练来源：imagenet1k_v1 / imagenet1k_v2 / none
+  # none 表示随机初始化，不得在报告中称为 ImageNet 预训练
+  pretrained: imagenet1k_v1
+  dropout: 0.2
+
+data:
+  config: configs/dataset_cifar10.yaml
+  batch_size: 128
+  eval_batch_size: 256
+  num_workers: 4
+  pin_memory: true
+
+training:
+  epochs: 15
+  optimizer: adamw
+  learning_rate: 0.0003
+  weight_decay: 0.01
+  label_smoothing: 0.1
+  warmup_epochs: 1
+  grad_clip: 1.0
+  amp: true
+  device: auto
+
+evaluation:
+  # 仅用验证集做模型选择；测试集只在训练结束后单独评估一次
+  monitor: val_accuracy
+  test_after_training: true
+  report_metrics:
+    - accuracy
+    - precision_macro
+    - recall_macro
+    - f1_macro
+    - confusion_matrix
+  latency:
+    batch_size: 1
+    warmup: 10
+    repeats: 50

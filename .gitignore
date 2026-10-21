@@ -1,0 +1,51 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# 虚拟环境
+.venv/
+venv/
+env/
+
+# 测试与工具缓存
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# 数据集与模型权重（体积大，不入库）
+# 仅忽略项目根目录的数据目录，避免误伤 src/mobilenet_attention/data
+/data/
+/datasets/
+/weights/
+/checkpoints/
+*.pth
+*.pt
+*.onnx
+
+# 实验输出：保留小型配置/日志/指标，忽略模型权重
+outputs/*
+!outputs/.gitkeep
+!outputs/**/
+!outputs/**/*.json
+!outputs/**/*.jsonl
+!outputs/**/*.yaml
+!outputs/**/*.md
+outputs/**/*.pt
+outputs/**/*.pth
+runs/
+/logs/
+
+# 编辑器与系统文件
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# 临时文件（训练终端输出含 tqdm 进度，以 train_log.jsonl 为准）
+*.log
+*.tmp

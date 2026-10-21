@@ -1,0 +1,17 @@
+{
+  "python": "3.12.3",
+  "python_executable": "C:\\Users\\Sylvia\\Desktop\\mobilenetv3-attention\\.venv\\Scripts\\python.exe",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "torch": "2.14.1+cu130",
+  "torchvision": "0.29.1+cu130",
+  "torch_cuda": "13.0",
+  "cudnn": 92400,
+  "cuda_available": true,
+  "device_count": 1,
+  "gpu": {
+    "name": "NVIDIA GeForce RTX 4060 Laptop GPU",
+    "total_memory_mib": 8187,
+    "capability": "8.9"
+  },
+  "git_commit": null
+}

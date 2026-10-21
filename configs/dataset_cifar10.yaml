@@ -1,0 +1,49 @@
+# CIFAR-10 数据集配置
+# 来源：Alex Krizhevsky, "Learning Multiple Layers of Features from Tiny Images", 2009
+# 官方页面：https://www.cs.toronto.edu/~kriz/cifar.html
+dataset:
+  name: cifar10
+  root: data
+  official_url: https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz
+  archive_md5: c58f30108f718f92721af3b95e74349a
+  num_classes: 10
+  class_names:
+    - airplane
+    - automobile
+    - bird
+    - cat
+    - deer
+    - dog
+    - frog
+    - horse
+    - ship
+    - truck
+  class_to_idx:
+    airplane: 0
+    automobile: 1
+    bird: 2
+    cat: 3
+    deer: 4
+    dog: 5
+    frog: 6
+    horse: 7
+    ship: 8
+    truck: 9
+  # 官方划分：train 50000 / test 10000
+  # 本项目从官方 train 中分层抽取 5000 张作为验证集，官方 test 仅用于最终评估
+  split:
+    strategy: stratified_holdout_from_official_train
+    val_size: 5000
+    train_size: 45000
+    test_size: 10000
+    seed: 42
+  input_size: 224
+  normalization:
+    mean: [0.485, 0.456, 0.406]
+    std: [0.229, 0.224, 0.225]
+  augmentation:
+    random_resized_crop_scale: [0.6, 1.0]
+    horizontal_flip: true
+  download: false
+  license_note: >-
+    数据集由官方页面公开发布用于研究；引用要求见官方页面（Krizhevsky 2009 技术报告）。

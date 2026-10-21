@@ -1,0 +1,18 @@
+# 核心依赖（版本与 2026-10-20 实际验证环境一致）
+# PyTorch 需从官方 CUDA 13.0 索引安装：
+#   python -m pip install torch==2.14.1+cu130 torchvision==0.29.1+cu130 \
+#       --index-url https://download.pytorch.org/whl/cu130
+torch==2.14.1+cu130
+torchvision==0.29.1+cu130
+numpy==2.5.2
+Pillow==12.3.0
+scikit-learn==1.9.1
+matplotlib==3.11.2
+pandas==3.0.6
+PyYAML==6.0.3
+tqdm==4.70.1
+gradio==6.30.0
+
+# 开发与测试
+pytest==9.1.1
+ruff==0.17.1

@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=78"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mobilenet-attention"
+version = "0.1.0"
+description = "基于注意力机制改进的 MobileNetV3 轻量化图像分类算法"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "torch==2.14.1+cu130",
+    "torchvision==0.29.1+cu130",
+    "numpy==2.5.2",
+    "Pillow==12.3.0",
+    "scikit-learn==1.9.1",
+    "matplotlib==3.11.2",
+    "pandas==3.0.6",
+    "PyYAML==6.0.3",
+    "tqdm==4.70.1",
+    "gradio==6.30.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest==9.1.1", "ruff==0.17.1"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-ra"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+src = ["src", "tests", "scripts"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+ignore = ["E501"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"

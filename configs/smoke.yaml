@@ -1,0 +1,43 @@
+# 冒烟配置：用于流程验证，不代表正式实验结果
+# 用法：python scripts/train.py --config configs/smoke.yaml
+experiment:
+  id: smoke_baseline
+  seed: 42
+  deterministic: true
+  output_root: outputs
+
+model:
+  name: mobilenet_v3_large
+  num_classes: 10
+  pretrained: none
+  dropout: 0.2
+
+data:
+  config: configs/dataset_cifar10.yaml
+  batch_size: 32
+  eval_batch_size: 64
+  num_workers: 0
+  pin_memory: false
+
+training:
+  epochs: 1
+  optimizer: adamw
+  learning_rate: 0.001
+  weight_decay: 0.01
+  label_smoothing: 0.0
+  warmup_epochs: 0
+  grad_clip: null
+  amp: true
+  device: auto
+  # 仅冒烟测试使用：每轮只跑 10 个训练批次与 2 个验证批次
+  limit_train_batches: 10
+
+evaluation:
+  monitor: val_accuracy
+  test_after_training: false
+  limit_val_batches: 2
+  report_metrics: [accuracy, precision_macro, recall_macro, f1_macro, confusion_matrix]
+  latency:
+    batch_size: 1
+    warmup: 2
+    repeats: 5

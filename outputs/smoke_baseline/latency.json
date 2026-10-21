@@ -1,0 +1,9 @@
+{
+  "batch_size": 1,
+  "input_size": 224,
+  "warmup": 2,
+  "repeats": 5,
+  "latency_ms_per_batch": 5.002580001018941,
+  "latency_ms_per_image": 5.002580001018941,
+  "throughput_images_per_s": 199.89685318302094
+}
