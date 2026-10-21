@@ -37,6 +37,30 @@ outputs/*
 !outputs/**/*.md
 outputs/**/*.pt
 outputs/**/*.pth
+# profiler Chrome trace 单文件 48-55 MB，不入库；保留 *_profile.json 与 summary
+outputs/**/*_trace*.json
+
+# 阶段 3A smoke/审计运行目录：保留本地，不入库
+# 理由：非正式实验结果；每个目录含 2 个约 50 MB 权重与一份 331 KB 重复划分索引
+outputs/smoke_amp_off/
+outputs/smoke_baseline_stage3a/
+outputs/smoke_eca/
+outputs/smoke_eca_monitor_loss/
+outputs/smoke_eca_override/
+outputs/smoke_eca_resume/
+outputs/smoke_eca_resume3/
+outputs/smoke_eca_v2/
+outputs/stage3a_audit_baseline_smoke/
+outputs/stage3a_audit_eca_smoke/
+outputs/stage3a_bad_name/
+outputs/stage3a_final_baseline/
+outputs/stage3a_final_eca/
+
+# 阶段 3A 中由 smoke 检查点产生的复算结果：非正式实验结果，保留本地
+outputs/stage3a/eca_smoke_identity_recheck.json
+outputs/stage3a/final_eca_identity.json
+outputs/stage3a/smoke_eca_val_recheck.json
+
 runs/
 /logs/
 

@@ -98,6 +98,62 @@ def test_scheduler_steps(tiny_setup):
     assert all(lr > 0 for lr in lrs)
 
 
+def test_scheduler_warmup_curve_matches_baseline(tiny_setup):
+    """warmup=1 时首轮 LR = 0.1×base，第二轮回到 base，之后余弦下降。"""
+    model, _, _ = tiny_setup
+    optimizer = torch.optim.SGD(model.parameters(), lr=0.1)
+    scheduler = build_scheduler(
+        optimizer, epochs=4, warmup_epochs=1, eta_min=1e-6, warmup_start_factor=0.1
+    )
+    lrs = []
+    for _ in range(4):
+        lrs.append(optimizer.param_groups[0]["lr"])
+        optimizer.step()
+        scheduler.step()
+    assert abs(lrs[0] - 0.01) < 1e-9
+    assert abs(lrs[1] - 0.1) < 1e-9
+    assert lrs[2] < lrs[1]
+    assert lrs[3] < lrs[2]
+
+
+def test_scheduler_eta_min_is_respected(tiny_setup):
+    model, _, _ = tiny_setup
+    optimizer = torch.optim.SGD(model.parameters(), lr=0.1)
+    scheduler = build_scheduler(optimizer, epochs=2, warmup_epochs=0, eta_min=0.005)
+    for _ in range(5):
+        optimizer.step()
+        scheduler.step()
+    assert optimizer.param_groups[0]["lr"] >= 0.005 - 1e-12
+
+
+def test_grad_clip_limits_parameter_update(tiny_setup):
+    """同一批数据下，梯度裁剪应让参数更新幅度更小。"""
+    model, loader, _ = tiny_setup
+    criterion = nn.CrossEntropyLoss()
+
+    unclipped = nn.Sequential(nn.Flatten(), nn.Linear(3 * 8 * 8, 10))
+    clipped = nn.Sequential(nn.Flatten(), nn.Linear(3 * 8 * 8, 10))
+    clipped.load_state_dict(unclipped.state_dict())
+
+    opt_a = torch.optim.SGD(unclipped.parameters(), lr=0.5)
+    opt_b = torch.optim.SGD(clipped.parameters(), lr=0.5)
+    train_one_epoch(unclipped, loader, criterion, opt_a, torch.device("cpu"))
+    train_one_epoch(clipped, loader, criterion, opt_b, torch.device("cpu"), grad_clip=1e-4)
+
+    delta_unclipped = (unclipped[1].weight - model[1].weight).abs().sum()
+    delta_clipped = (clipped[1].weight - model[1].weight).abs().sum()
+    assert delta_clipped < delta_unclipped
+
+
+def test_label_smoothing_increases_loss_for_confident_correct(tiny_setup):
+    """配置的 label_smoothing 通过 CrossEntropyLoss 生效，而非被忽略。"""
+    logits = torch.tensor([[10.0, 0.0], [0.0, 10.0]])
+    targets = torch.tensor([0, 1])
+    plain = nn.CrossEntropyLoss()(logits, targets)
+    smoothed = nn.CrossEntropyLoss(label_smoothing=0.1)(logits, targets)
+    assert smoothed > plain
+
+
 def test_jsonl_logger_appends(tmp_path: Path):
     logger = JsonlLogger(tmp_path / "log.jsonl")
     logger.log({"epoch": 0, "val_accuracy": 0.5})

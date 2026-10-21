@@ -21,7 +21,7 @@ sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
 from mobilenet_attention.data import build_cifar10_datasets, build_dataloaders  # noqa: E402
 from mobilenet_attention.engine import evaluate, measure_latency  # noqa: E402
-from mobilenet_attention.models import build_mobilenet_v3_large  # noqa: E402
+from mobilenet_attention.models import build_model, describe_model  # noqa: E402
 from mobilenet_attention.utils.config import load_config  # noqa: E402
 from mobilenet_attention.utils.seed import resolve_device, set_seed  # noqa: E402
 
@@ -58,12 +58,16 @@ def main() -> int:
         root = PROJECT_ROOT / root
 
     device = resolve_device(config.get("training", {}).get("device", "auto"))
-    model = build_mobilenet_v3_large(
+    model_config = config.get("model", {})
+    model = build_model(
+        name=str(model_config.get("name", "mobilenet_v3_large")),
         num_classes=int(dataset_config["num_classes"]),
         pretrained="none",  # 权重来自检查点，不重复下载预训练
-        dropout=float(config.get("model", {}).get("dropout", 0.2)),
+        dropout=float(model_config.get("dropout", 0.2)),
+        attention=model_config.get("attention"),
     ).to(device)
     model.load_state_dict(checkpoint["model_state"])
+    identity = describe_model(model)
 
     datasets = build_cifar10_datasets(
         root=root,
@@ -91,6 +95,7 @@ def main() -> int:
         "checkpoint": str(checkpoint_path),
         "checkpoint_epoch": checkpoint.get("epoch"),
         "split": args.split,
+        **identity,
         **metrics,
         "latency": latency,
     }

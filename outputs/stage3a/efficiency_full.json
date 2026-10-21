@@ -1,0 +1,231 @@
+{
+  "device": "cuda",
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "measurement_isolation": "每个模型在独立子进程中测量，避免显存读数互相污染",
+  "models": {
+    "baseline": {
+      "identity": {
+        "model_name": "mobilenet_v3_large",
+        "class": "MobileNetV3",
+        "num_classes": 10,
+        "pretrained": "imagenet1k_v1",
+        "attention_type": null,
+        "attention_placement": null,
+        "attention_blocks": 0,
+        "attention_params": 0
+      },
+      "parameters": {
+        "total": 4214842,
+        "trainable": 4214842,
+        "non_trainable": 0,
+        "attention": 0,
+        "parameter_bytes": 16859368,
+        "buffer_bytes": 97968,
+        "model_size_mib": 16.171775817871094,
+        "is_measured": true
+      },
+      "inference_memory_bs1": {
+        "batch_size": 1,
+        "weights_and_buffers_mib": 16.2490234375,
+        "peak_total_mib": 48.83251953125,
+        "activation_delta_mib": 32.58349609375,
+        "is_measured": true
+      },
+      "flops": {
+        "tool": "torch.utils.flop_counter.FlopCounterMode",
+        "scope": "仅卷积与全连接；不含 GAP、Sigmoid、逐元素乘法",
+        "batch_size": 1,
+        "input_size": 224,
+        "total_flops": 430645120,
+        "total_macs": 215322560,
+        "breakdown": {
+          "aten.convolution": 428161920,
+          "aten.addmm": 2483200
+        },
+        "is_measured": false,
+        "note": "shape-based 理论计数，不是硬件实测吞吐"
+      },
+      "training_peak": {
+        "batch_size": 128,
+        "amp": true,
+        "repeats": 3,
+        "samples_mib": [
+          2912.32421875,
+          2945.2578125,
+          2945.2578125
+        ],
+        "mean_mib": 2934.2799479166665,
+        "stdev_mib": 19.014219216944277,
+        "max_mib": 2945.2578125,
+        "is_measured": true
+      }
+    },
+    "eca_non_se": {
+      "identity": {
+        "model_name": "mobilenet_v3_large_eca",
+        "class": "MobileNetV3",
+        "num_classes": 10,
+        "pretrained": "imagenet1k_v1",
+        "attention_type": "eca",
+        "attention_placement": "non_se_blocks",
+        "attention_blocks": 7,
+        "attention_params": 29
+      },
+      "parameters": {
+        "total": 4214871,
+        "trainable": 4214871,
+        "non_trainable": 0,
+        "attention": 29,
+        "parameter_bytes": 16859484,
+        "buffer_bytes": 97968,
+        "model_size_mib": 16.171886444091797,
+        "is_measured": true
+      },
+      "inference_memory_bs1": {
+        "batch_size": 1,
+        "weights_and_buffers_mib": 16.25244140625,
+        "peak_total_mib": 48.8359375,
+        "activation_delta_mib": 32.58349609375,
+        "is_measured": true
+      },
+      "flops": {
+        "tool": "torch.utils.flop_counter.FlopCounterMode",
+        "scope": "仅卷积与全连接；不含 GAP、Sigmoid、逐元素乘法",
+        "batch_size": 1,
+        "input_size": 224,
+        "total_flops": 430654112,
+        "total_macs": 215327056,
+        "breakdown": {
+          "aten.convolution": 428170912,
+          "aten.addmm": 2483200
+        },
+        "is_measured": false,
+        "note": "shape-based 理论计数，不是硬件实测吞吐"
+      },
+      "eca_analytic": {
+        "layers": [
+          {
+            "layer": "features.1.block.1",
+            "channels": 16,
+            "spatial": [
+              112,
+              112
+            ],
+            "kernel": 3,
+            "gap_macs": 200704,
+            "conv1d_macs": 48,
+            "mul_macs": 200704,
+            "total_macs": 401456
+          },
+          {
+            "layer": "features.2.block.2",
+            "channels": 64,
+            "spatial": [
+              56,
+              56
+            ],
+            "kernel": 3,
+            "gap_macs": 200704,
+            "conv1d_macs": 192,
+            "mul_macs": 200704,
+            "total_macs": 401600
+          },
+          {
+            "layer": "features.3.block.2",
+            "channels": 72,
+            "spatial": [
+              56,
+              56
+            ],
+            "kernel": 3,
+            "gap_macs": 225792,
+            "conv1d_macs": 216,
+            "mul_macs": 225792,
+            "total_macs": 451800
+          },
+          {
+            "layer": "features.7.block.2",
+            "channels": 240,
+            "spatial": [
+              14,
+              14
+            ],
+            "kernel": 5,
+            "gap_macs": 47040,
+            "conv1d_macs": 1200,
+            "mul_macs": 47040,
+            "total_macs": 95280
+          },
+          {
+            "layer": "features.8.block.2",
+            "channels": 200,
+            "spatial": [
+              14,
+              14
+            ],
+            "kernel": 5,
+            "gap_macs": 39200,
+            "conv1d_macs": 1000,
+            "mul_macs": 39200,
+            "total_macs": 79400
+          },
+          {
+            "layer": "features.9.block.2",
+            "channels": 184,
+            "spatial": [
+              14,
+              14
+            ],
+            "kernel": 5,
+            "gap_macs": 36064,
+            "conv1d_macs": 920,
+            "mul_macs": 36064,
+            "total_macs": 73048
+          },
+          {
+            "layer": "features.10.block.2",
+            "channels": 184,
+            "spatial": [
+              14,
+              14
+            ],
+            "kernel": 5,
+            "gap_macs": 36064,
+            "conv1d_macs": 920,
+            "mul_macs": 36064,
+            "total_macs": 73048
+          }
+        ],
+        "total_macs": 1575632,
+        "is_measured": false,
+        "note": "由真实前向钩子取形状后解析计算；每元素一次乘或加记 1 MAC"
+      },
+      "training_peak": {
+        "batch_size": 128,
+        "amp": true,
+        "repeats": 3,
+        "samples_mib": [
+          3108.0185546875,
+          3141.544921875,
+          3141.544921875
+        ],
+        "mean_mib": 3130.3694661458335,
+        "stdev_mib": 19.35645712065336,
+        "max_mib": 3141.544921875,
+        "is_measured": true
+      }
+    }
+  },
+  "measured_at": "2026-10-21T12:43:39.203313+00:00",
+  "delta": {
+    "parameters": 29,
+    "trainable_parameters": 29,
+    "model_size_mib": 0.000110626220703125,
+    "flops": 8992,
+    "macs_counter": 4496,
+    "eca_analytic_macs": 1575632,
+    "eca_analytic_macs_percent": 0.7317542574266254,
+    "inference_peak_total_mib_bs1": 0.00341796875,
+    "training_peak_mean_mib": 196.08951822916697
+  }
+}

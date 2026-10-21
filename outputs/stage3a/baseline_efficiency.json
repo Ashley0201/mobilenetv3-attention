@@ -1,0 +1,57 @@
+{
+  "model": "baseline",
+  "attention": null,
+  "pretrained": "imagenet1k_v1",
+  "device": "cuda",
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "parameters": {
+    "total": 4214842,
+    "backbone": 2971952,
+    "classifier": 1242890,
+    "attention": 0
+  },
+  "model_size_mib": 16.171775817871094,
+  "flops": {
+    "batch_size": 1,
+    "input_size": 224,
+    "total_flops": 430645120,
+    "total_macs": 215322560,
+    "breakdown": {
+      "aten.convolution": 428161920,
+      "aten.addmm": 2483200
+    },
+    "convention": "torch.utils.flop_counter；理论值，非硬件实测"
+  },
+  "latency": {
+    "batch_size": 1,
+    "input_size": 224,
+    "warmup": 10,
+    "repeats_per_run": 50,
+    "runs": [
+      4.952762000029907,
+      4.981890000635758,
+      4.86168000032194,
+      4.712549999821931,
+      5.155127999605611
+    ],
+    "mean_ms": 4.932802000083029,
+    "stdev_ms": 0.16263929870182842,
+    "min_ms": 4.712549999821931,
+    "max_ms": 5.155127999605611,
+    "median_ms": 4.952762000029907
+  },
+  "gpu_state_before": {
+    "temperature_c": 49,
+    "sm_clock_mhz": 210,
+    "utilization_percent": 6,
+    "memory_used_mib": 1151
+  },
+  "gpu_state_after": {
+    "temperature_c": 52,
+    "sm_clock_mhz": 2250,
+    "utilization_percent": 24,
+    "memory_used_mib": 1197
+  },
+  "train_peak_memory_mib": 2912.32421875,
+  "measured_at": "2026-10-21T07:39:24.269094+00:00"
+}

@@ -1,0 +1,362 @@
+{
+  "protocol": {
+    "batch_size": 1,
+    "input_size": 224,
+    "iterations_per_profile": 50,
+    "rounds": 3,
+    "order": [
+      "baseline",
+      "eca_non_se",
+      "eca_non_se",
+      "baseline",
+      "baseline",
+      "eca_non_se"
+    ],
+    "warmup_per_profile": 200
+  },
+  "per_round": {
+    "baseline": [
+      {
+        "round": 0,
+        "model": "baseline",
+        "gpu_state_before": {
+          "temperature_c": 53,
+          "sm_clock_mhz": 2250,
+          "utilization_percent": 23,
+          "memory_used_mib": 1262
+        },
+        "gpu_state_after": {
+          "temperature_c": 53,
+          "sm_clock_mhz": 2250,
+          "utilization_percent": 1,
+          "memory_used_mib": 1274
+        },
+        "kernel_launches": 14100,
+        "kernel_launches_per_iteration": 282.0,
+        "kernel_us_per_iteration": 757.88132,
+        "related_ops": {
+          "adaptive_avg_pool": {
+            "count_total": 450,
+            "count_per_iteration": 9.0,
+            "device_us_total": 0.0,
+            "device_us_per_iteration": 0.0
+          },
+          "avg_pool": {
+            "count_total": 450,
+            "count_per_iteration": 9.0,
+            "device_us_total": 0.0,
+            "device_us_per_iteration": 0.0
+          },
+          "sigmoid": {
+            "count_total": 800,
+            "count_per_iteration": 16.0,
+            "device_us_total": 1015.3319999978849,
+            "device_us_per_iteration": 20.306639999957696
+          },
+          "mul": {
+            "count_total": 800,
+            "count_per_iteration": 16.0,
+            "device_us_total": 1742.1059999998906,
+            "device_us_per_iteration": 34.84211999999781
+          }
+        }
+      },
+      {
+        "round": 1,
+        "model": "baseline",
+        "gpu_state_before": {
+          "temperature_c": 55,
+          "sm_clock_mhz": 2250,
+          "utilization_percent": 21,
+          "memory_used_mib": 1274
+        },
+        "gpu_state_after": {
+          "temperature_c": 54,
+          "sm_clock_mhz": 1155,
+          "utilization_percent": 0,
+          "memory_used_mib": 1274
+        },
+        "kernel_launches": 14100,
+        "kernel_launches_per_iteration": 282.0,
+        "kernel_us_per_iteration": 752.55818,
+        "related_ops": {
+          "adaptive_avg_pool": {
+            "count_total": 450,
+            "count_per_iteration": 9.0,
+            "device_us_total": 0.0,
+            "device_us_per_iteration": 0.0
+          },
+          "avg_pool": {
+            "count_total": 450,
+            "count_per_iteration": 9.0,
+            "device_us_total": 0.0,
+            "device_us_per_iteration": 0.0
+          },
+          "sigmoid": {
+            "count_total": 800,
+            "count_per_iteration": 16.0,
+            "device_us_total": 1014.3259999995262,
+            "device_us_per_iteration": 20.286519999990524
+          },
+          "mul": {
+            "count_total": 800,
+            "count_per_iteration": 16.0,
+            "device_us_total": 1738.6020000002245,
+            "device_us_per_iteration": 34.77204000000449
+          }
+        }
+      },
+      {
+        "round": 2,
+        "model": "baseline",
+        "gpu_state_before": {
+          "temperature_c": 55,
+          "sm_clock_mhz": 2250,
+          "utilization_percent": 21,
+          "memory_used_mib": 1274
+        },
+        "gpu_state_after": {
+          "temperature_c": 54,
+          "sm_clock_mhz": 1020,
+          "utilization_percent": 5,
+          "memory_used_mib": 1274
+        },
+        "kernel_launches": 14100,
+        "kernel_launches_per_iteration": 282.0,
+        "kernel_us_per_iteration": 757.0922400000001,
+        "related_ops": {
+          "adaptive_avg_pool": {
+            "count_total": 450,
+            "count_per_iteration": 9.0,
+            "device_us_total": 0.0,
+            "device_us_per_iteration": 0.0
+          },
+          "avg_pool": {
+            "count_total": 450,
+            "count_per_iteration": 9.0,
+            "device_us_total": 0.0,
+            "device_us_per_iteration": 0.0
+          },
+          "sigmoid": {
+            "count_total": 800,
+            "count_per_iteration": 16.0,
+            "device_us_total": 1015.479999999875,
+            "device_us_per_iteration": 20.3095999999975
+          },
+          "mul": {
+            "count_total": 800,
+            "count_per_iteration": 16.0,
+            "device_us_total": 1737.7880000001323,
+            "device_us_per_iteration": 34.755760000002645
+          }
+        }
+      }
+    ],
+    "eca_non_se": [
+      {
+        "round": 0,
+        "model": "eca_non_se",
+        "gpu_state_before": {
+          "temperature_c": 54,
+          "sm_clock_mhz": 2250,
+          "utilization_percent": 15,
+          "memory_used_mib": 1274
+        },
+        "gpu_state_after": {
+          "temperature_c": 52,
+          "sm_clock_mhz": 765,
+          "utilization_percent": 2,
+          "memory_used_mib": 1274
+        },
+        "kernel_launches": 15500,
+        "kernel_launches_per_iteration": 310.0,
+        "kernel_us_per_iteration": 1186.5264,
+        "related_ops": {
+          "adaptive_avg_pool": {
+            "count_total": 800,
+            "count_per_iteration": 16.0,
+            "device_us_total": 0.0,
+            "device_us_per_iteration": 0.0
+          },
+          "avg_pool": {
+            "count_total": 800,
+            "count_per_iteration": 16.0,
+            "device_us_total": 0.0,
+            "device_us_per_iteration": 0.0
+          },
+          "conv1d": {
+            "count_total": 350,
+            "count_per_iteration": 7.0,
+            "device_us_total": 0.0,
+            "device_us_per_iteration": 0.0
+          },
+          "sigmoid": {
+            "count_total": 1500,
+            "count_per_iteration": 30.0,
+            "device_us_total": 2942.366000000178,
+            "device_us_per_iteration": 58.847320000003556
+          },
+          "mul": {
+            "count_total": 1500,
+            "count_per_iteration": 30.0,
+            "device_us_total": 5062.4439999987,
+            "device_us_per_iteration": 101.248879999974
+          }
+        }
+      },
+      {
+        "round": 1,
+        "model": "eca_non_se",
+        "gpu_state_before": {
+          "temperature_c": 55,
+          "sm_clock_mhz": 2250,
+          "utilization_percent": 19,
+          "memory_used_mib": 1274
+        },
+        "gpu_state_after": {
+          "temperature_c": 53,
+          "sm_clock_mhz": 1035,
+          "utilization_percent": 13,
+          "memory_used_mib": 1274
+        },
+        "kernel_launches": 15500,
+        "kernel_launches_per_iteration": 310.0,
+        "kernel_us_per_iteration": 855.63344,
+        "related_ops": {
+          "adaptive_avg_pool": {
+            "count_total": 800,
+            "count_per_iteration": 16.0,
+            "device_us_total": 0.0,
+            "device_us_per_iteration": 0.0
+          },
+          "avg_pool": {
+            "count_total": 800,
+            "count_per_iteration": 16.0,
+            "device_us_total": 0.0,
+            "device_us_per_iteration": 0.0
+          },
+          "conv1d": {
+            "count_total": 350,
+            "count_per_iteration": 7.0,
+            "device_us_total": 0.0,
+            "device_us_per_iteration": 0.0
+          },
+          "sigmoid": {
+            "count_total": 1500,
+            "count_per_iteration": 30.0,
+            "device_us_total": 2115.995999999194,
+            "device_us_per_iteration": 42.319919999983874
+          },
+          "mul": {
+            "count_total": 1500,
+            "count_per_iteration": 30.0,
+            "device_us_total": 3652.097999999399,
+            "device_us_per_iteration": 73.04195999998798
+          }
+        }
+      },
+      {
+        "round": 2,
+        "model": "eca_non_se",
+        "gpu_state_before": {
+          "temperature_c": 55,
+          "sm_clock_mhz": 2250,
+          "utilization_percent": 15,
+          "memory_used_mib": 1274
+        },
+        "gpu_state_after": {
+          "temperature_c": 54,
+          "sm_clock_mhz": 915,
+          "utilization_percent": 1,
+          "memory_used_mib": 1274
+        },
+        "kernel_launches": 15500,
+        "kernel_launches_per_iteration": 310.0,
+        "kernel_us_per_iteration": 1016.74218,
+        "related_ops": {
+          "adaptive_avg_pool": {
+            "count_total": 800,
+            "count_per_iteration": 16.0,
+            "device_us_total": 0.0,
+            "device_us_per_iteration": 0.0
+          },
+          "avg_pool": {
+            "count_total": 800,
+            "count_per_iteration": 16.0,
+            "device_us_total": 0.0,
+            "device_us_per_iteration": 0.0
+          },
+          "conv1d": {
+            "count_total": 350,
+            "count_per_iteration": 7.0,
+            "device_us_total": 0.0,
+            "device_us_per_iteration": 0.0
+          },
+          "sigmoid": {
+            "count_total": 1500,
+            "count_per_iteration": 30.0,
+            "device_us_total": 2499.4240000003283,
+            "device_us_per_iteration": 49.98848000000657
+          },
+          "mul": {
+            "count_total": 1500,
+            "count_per_iteration": 30.0,
+            "device_us_total": 4316.224000000056,
+            "device_us_per_iteration": 86.32448000000112
+          }
+        }
+      }
+    ]
+  },
+  "summary": {
+    "baseline": {
+      "kernel_launches_per_iteration_samples": [
+        282.0,
+        282.0,
+        282.0
+      ],
+      "kernel_launches_per_iteration_median": 282.0,
+      "kernel_us_per_iteration_samples": [
+        757.88132,
+        752.55818,
+        757.0922400000001
+      ],
+      "kernel_us_per_iteration_median": 757.0922400000001,
+      "clocks_mhz": [
+        2250,
+        2250,
+        2250
+      ]
+    },
+    "eca_non_se": {
+      "kernel_launches_per_iteration_samples": [
+        310.0,
+        310.0,
+        310.0
+      ],
+      "kernel_launches_per_iteration_median": 310.0,
+      "kernel_us_per_iteration_samples": [
+        1186.5264,
+        855.63344,
+        1016.74218
+      ],
+      "kernel_us_per_iteration_median": 1016.74218,
+      "clocks_mhz": [
+        2250,
+        2250,
+        2250
+      ]
+    }
+  },
+  "delta_kernel_launches_per_iteration": 28.0,
+  "delta_kernel_us_per_iteration": 259.6499399999999,
+  "related_ops_eca_median": {
+    "adaptive_avg_pool": 0.0,
+    "avg_pool": 0.0,
+    "conv1d": 0.0,
+    "sigmoid": 49.98848000000657,
+    "mul": 86.32448000000112
+  },
+  "caveat": "kernel 数不受时钟影响，可直接比较；kernel 耗时受 GPU 频率影响，表中记录每轮时钟，跨轮比较需谨慎。",
+  "measured_at": "2026-10-21T08:17:51.851791+00:00"
+}

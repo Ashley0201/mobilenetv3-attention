@@ -10,6 +10,7 @@ from .cifar10 import (
     dataset_summary,
     stratified_split,
     targets_tensor,
+    transform_spec,
 )
 
 __all__ = [
@@ -22,4 +23,5 @@ __all__ = [
     "dataset_summary",
     "stratified_split",
     "targets_tensor",
+    "transform_spec",
 ]

@@ -60,6 +60,38 @@ def build_eval_transform(input_size: int = 224) -> transforms.Compose:
     )
 
 
+def transform_spec(input_size: int, augmentation: dict[str, Any] | None = None) -> dict[str, Any]:
+    """返回实际生效的变换链描述，写入实验配置快照，避免只记录增强参数。"""
+    augmentation = augmentation or {}
+    scale = list(augmentation.get("random_resized_crop_scale", (0.6, 1.0)))
+    flip = bool(augmentation.get("horizontal_flip", True))
+    train_ops = [
+        {"op": "RandomResizedCrop", "size": input_size, "scale": scale, "antialias": True},
+    ]
+    if flip:
+        train_ops.append({"op": "RandomHorizontalFlip", "p": 0.5})
+    train_ops.extend(
+        [
+            {"op": "ToTensor"},
+            {
+                "op": "Normalize",
+                "mean": list(IMAGENET_MEAN),
+                "std": list(IMAGENET_STD),
+            },
+        ]
+    )
+    eval_ops = [
+        {"op": "Resize", "size": [input_size, input_size], "antialias": True},
+        {"op": "ToTensor"},
+        {
+            "op": "Normalize",
+            "mean": list(IMAGENET_MEAN),
+            "std": list(IMAGENET_STD),
+        },
+    ]
+    return {"train": train_ops, "eval": eval_ops}
+
+
 def stratified_split(targets: list[int], val_size: int, seed: int) -> tuple[list[int], list[int]]:
     """按类别分层划分训练/验证索引，保证验证集类别分布与训练集一致。"""
     indices = list(range(len(targets)))

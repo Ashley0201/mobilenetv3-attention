@@ -1,0 +1,51 @@
+# ECA 冒烟配置：只验证流程，不代表实验结果
+# 用法：python scripts/train.py --config configs/smoke_eca.yaml
+experiment:
+  id: smoke_eca
+  seed: 42
+  deterministic: true
+  output_root: outputs
+
+model:
+  name: mobilenet_v3_large_eca
+  num_classes: 10
+  pretrained: none
+  dropout: 0.2
+  attention:
+    type: eca
+    placement: non_se_blocks
+    gamma: 2.0
+    b: 1.0
+
+data:
+  config: configs/dataset_cifar10.yaml
+  batch_size: 32
+  eval_batch_size: 64
+  num_workers: 0
+  pin_memory: false
+
+training:
+  epochs: 1
+  optimizer: adamw
+  learning_rate: 0.001
+  weight_decay: 0.01
+  label_smoothing: 0.0
+  warmup_epochs: 0
+  grad_clip: null
+  amp: true
+  device: auto
+  limit_train_batches: 10
+  scheduler:
+    name: cosine
+    warmup_start_factor: 0.1
+    eta_min: 0.000001
+
+evaluation:
+  monitor: val_accuracy
+  test_after_training: false
+  limit_val_batches: 2
+  report_metrics: [accuracy, precision_macro, recall_macro, f1_macro, confusion_matrix]
+  latency:
+    batch_size: 1
+    warmup: 2
+    repeats: 5

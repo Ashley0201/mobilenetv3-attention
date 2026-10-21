@@ -1,0 +1,68 @@
+{
+  "protocol": {
+    "batch_size": 1,
+    "input_size": 224,
+    "warmup": 20,
+    "repeats_per_measurement": 100,
+    "rounds": 6,
+    "order": [
+      "baseline",
+      "eca_non_se",
+      "eca_non_se",
+      "baseline",
+      "baseline",
+      "eca_non_se",
+      "eca_non_se",
+      "baseline",
+      "baseline",
+      "eca_non_se",
+      "eca_non_se",
+      "baseline"
+    ],
+    "gpu_state": {
+      "temperature_c": 53,
+      "sm_clock_mhz": 1305,
+      "utilization_percent": 35,
+      "memory_used_mib": 1209
+    }
+  },
+  "samples_ms": {
+    "baseline": [
+      5.181477000005543,
+      5.105458000325598,
+      5.024102999595925,
+      4.928078000084497,
+      5.02907200017944,
+      5.00880400009919
+    ],
+    "eca_non_se": [
+      5.739552999730222,
+      5.965848000487313,
+      5.678757999558002,
+      5.6181639997521415,
+      5.881955000222661,
+      5.801909999572672
+    ]
+  },
+  "summary": {
+    "baseline": {
+      "mean_ms": 5.0461653333816985,
+      "stdev_ms": 0.0871140443324405,
+      "median_ms": 5.0265874998876825,
+      "min_ms": 4.928078000084497,
+      "max_ms": 5.181477000005543,
+      "n": 6
+    },
+    "eca_non_se": {
+      "mean_ms": 5.7810313332205014,
+      "stdev_ms": 0.1292166870091359,
+      "median_ms": 5.770731499651447,
+      "min_ms": 5.6181639997521415,
+      "max_ms": 5.965848000487313,
+      "n": 6
+    }
+  },
+  "measured_at": "2026-10-21T07:47:36.182019+00:00",
+  "delta_mean_ms": 0.734865999838803,
+  "delta_percent": 14.562860138122563
+}

@@ -1,0 +1,57 @@
+# MobileNetV3-Large + ECA（非 SE 块）训练配置
+# 阶段 3 主实验配置；与基线配置的唯一差异是 model.attention 段
+experiment:
+  id: eca_non_se_cifar10_seed42
+  seed: 42
+  deterministic: true
+  output_root: outputs
+
+model:
+  # 名称决定构建逻辑：mobilenet_v3_large / mobilenet_v3_large_eca
+  name: mobilenet_v3_large_eca
+  num_classes: 10
+  pretrained: imagenet1k_v1
+  dropout: 0.2
+  # ECA 插入 7 个不含 SE 的 InvertedResidual 块（1,2,3,7,8,9,10）
+  # 位置：深度卷积之后、投影卷积之前
+  attention:
+    type: eca
+    placement: non_se_blocks
+    gamma: 2.0
+    b: 1.0
+
+data:
+  config: configs/dataset_cifar10.yaml
+  batch_size: 128
+  eval_batch_size: 256
+  num_workers: 4
+  pin_memory: true
+
+training:
+  epochs: 15
+  optimizer: adamw
+  learning_rate: 0.0003
+  weight_decay: 0.01
+  label_smoothing: 0.1
+  warmup_epochs: 1
+  grad_clip: 1.0
+  amp: true
+  device: auto
+  scheduler:
+    name: cosine
+    warmup_start_factor: 0.1
+    eta_min: 0.000001
+
+evaluation:
+  monitor: val_accuracy
+  test_after_training: true
+  report_metrics:
+    - accuracy
+    - precision_macro
+    - recall_macro
+    - f1_macro
+    - confusion_matrix
+  latency:
+    batch_size: 1
+    warmup: 10
+    repeats: 50

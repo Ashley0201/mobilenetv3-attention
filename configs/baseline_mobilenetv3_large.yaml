@@ -30,6 +30,11 @@ training:
   grad_clip: 1.0
   amp: true
   device: auto
+  # 显式记录调度器参数（与阶段 2 代码中的硬编码默认值一致，行为不变）
+  scheduler:
+    name: cosine
+    warmup_start_factor: 0.1
+    eta_min: 0.000001
 
 evaluation:
   # 仅用验证集做模型选择；测试集只在训练结束后单独评估一次

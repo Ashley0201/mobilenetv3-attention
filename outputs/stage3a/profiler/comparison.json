@@ -1,0 +1,277 @@
+{
+  "protocol": {
+    "batch_size": 1,
+    "input_size": 224,
+    "warmup_before_profile": 20,
+    "profiled_iterations": 50,
+    "latency_rounds": 6,
+    "clock_warmup_iterations": 400
+  },
+  "clock_warmup_before": {
+    "rounds": 1,
+    "clock_history": [
+      {
+        "temperature_c": 52,
+        "sm_clock_mhz": 2250,
+        "utilization_percent": 23,
+        "memory_used_mib": 1262
+      }
+    ],
+    "final": {
+      "temperature_c": 52,
+      "sm_clock_mhz": 2250,
+      "utilization_percent": 23,
+      "memory_used_mib": 1262
+    }
+  },
+  "latency_before_profiler": {
+    "baseline": {
+      "mean_ms": 4.845032999971106,
+      "median_ms": 4.828992999682669,
+      "stdev_ms": 0.04894248867588332,
+      "min_ms": 4.792094000149518,
+      "max_ms": 4.913403000100516,
+      "n": 6
+    },
+    "eca_non_se": {
+      "mean_ms": 5.573034666692062,
+      "median_ms": 5.577567000000272,
+      "stdev_ms": 0.13617811964941606,
+      "min_ms": 5.325245000422001,
+      "max_ms": 5.722856999491341,
+      "n": 6
+    }
+  },
+  "latency_after_profiler": {
+    "baseline": {
+      "mean_ms": 6.351470999943558,
+      "median_ms": 6.032368999731261,
+      "stdev_ms": 0.8074803058135074,
+      "min_ms": 5.631948000518605,
+      "max_ms": 7.483445999678224,
+      "n": 6
+    },
+    "eca_non_se": {
+      "mean_ms": 7.356982999966324,
+      "median_ms": 7.272732499986887,
+      "stdev_ms": 0.8623643361769988,
+      "min_ms": 6.4099019998684525,
+      "max_ms": 8.628806000342593,
+      "n": 6
+    }
+  },
+  "kernel_stats": {
+    "baseline": {
+      "kernel_launches": 14100,
+      "kernel_launches_per_iteration": 282.0,
+      "kernel_total_us": 64654.841,
+      "kernel_us_per_iteration": 1293.09682,
+      "top_kernels": [
+        {
+          "name": "_ZN5cudnn26bn_fw_inf_1C11_kernel_NCHWIffLb1ELi1EEEvT0_S1_17cudnnTensorStructPKT_S2_PS3_S2_PKS1_S8_S8_S8_S1_",
+          "count": 2300,
+          "count_per_iteration": 46.0,
+          "total_us": 10460.196000000018
+        },
+        {
+          "name": "_ZN2at6native29vectorized_elementwise_kernelILi4ENS0_11FillFunctorIfEESt5arrayIPcLy1EELb0EEEviT0_T1_",
+          "count": 3800,
+          "count_per_iteration": 76.0,
+          "total_us": 8093.012000000043
+        },
+        {
+          "name": "_ZN7cutlass7Kernel2I50cutlass_80_tensorop_s1688gemm_64x64_16x6_nn_align4EEvNT_6ParamsE",
+          "count": 650,
+          "count_per_iteration": 13.0,
+          "total_us": 6634.301999999996
+        },
+        {
+          "name": "_ZN2at6native51_GLOBAL__N__68a3d168_18_DepthwiseConv2d_cu_2ee6150b31conv_depthwise2d_forward_kernelILi3EfiEEvN5torch10he",
+          "count": 450,
+          "count_per_iteration": 9.0,
+          "total_us": 6371.541999999994
+        },
+        {
+          "name": "_ZN2at6native51_GLOBAL__N__68a3d168_18_DepthwiseConv2d_cu_2ee6150b31conv_depthwise2d_forward_kernelILi5EfiEEvN5torch10he",
+          "count": 300,
+          "count_per_iteration": 6.0,
+          "total_us": 4079.679999999996
+        },
+        {
+          "name": "_ZN7cutlass7Kernel2I50cutlass_80_tensorop_s1688gemm_64x64_16x6_nn_align1EEvNT_6ParamsE",
+          "count": 300,
+          "count_per_iteration": 6.0,
+          "total_us": 3223.1479999999983
+        },
+        {
+          "name": "_ZN7cutlass7Kernel2I50cutlass_80_tensorop_s1688gemm_64x64_32x6_nn_align4EEvNT_6ParamsE",
+          "count": 350,
+          "count_per_iteration": 7.0,
+          "total_us": 3099.5989999999993
+        },
+        {
+          "name": "_ZN2at6native29vectorized_elementwise_kernelILi4EZZZNS0_49_GLOBAL__N__a62a4dcd_16_TensorCompare_cu_71e06f4e19launch_clam",
+          "count": 950,
+          "count_per_iteration": 19.0,
+          "total_us": 2971.6069999999945
+        },
+        {
+          "name": "_ZN2at6native29vectorized_elementwise_kernelILi4ENS0_15CUDAFunctor_addIfEESt5arrayIPcLy3EELb0EEEviT0_T1_",
+          "count": 1300,
+          "count_per_iteration": 26.0,
+          "total_us": 2918.962999999992
+        },
+        {
+          "name": "_ZN2at6native29vectorized_elementwise_kernelILi4EZZZNS0_66_GLOBAL__N__dd8fdf6c_28_ActivationHardswishKernel_cu_40bf2255_",
+          "count": 1050,
+          "count_per_iteration": 21.0,
+          "total_us": 2736.7150000000033
+        },
+        {
+          "name": "_ZN2at6native13reduce_kernelILi512ELi1ENS0_8ReduceOpIfNS0_7MeanOpsIffffEEjfLi4ELi4EEEEEvT1_",
+          "count": 450,
+          "count_per_iteration": 9.0,
+          "total_us": 2322.074
+        },
+        {
+          "name": "_ZN8internal5gemvx6kernelIiiffffLb0ELb1ELb1ELb0ELi7ELb0E18cublasGemvParamsExIi30cublasGemvTensorStridedBatchedIKfES5_S3_",
+          "count": 400,
+          "count_per_iteration": 8.0,
+          "total_us": 1843.897999999997
+        },
+        {
+          "name": "ampere_sgemm_128x32_nn",
+          "count": 100,
+          "count_per_iteration": 2.0,
+          "total_us": 1524.1679999999994
+        },
+        {
+          "name": "_ZN2at6native18elementwise_kernelILi128ELi2EZNS0_22gpu_kernel_impl_nocastINS0_13BinaryFunctorIfffNS0_15binary_internal10",
+          "count": 400,
+          "count_per_iteration": 8.0,
+          "total_us": 1509.9039999999986
+        },
+        {
+          "name": "_ZN8internal5gemvx6kernelIiiffffLb0ELb1ELb1ELb0ELi5ELb0E18cublasGemvParamsExIi30cublasGemvTensorStridedBatchedIKfES5_S3_",
+          "count": 50,
+          "count_per_iteration": 1.0,
+          "total_us": 1208.1440000000005
+        }
+      ]
+    },
+    "eca_non_se": {
+      "kernel_launches": 15500,
+      "kernel_launches_per_iteration": 310.0,
+      "kernel_total_us": 82799.564,
+      "kernel_us_per_iteration": 1655.99128,
+      "top_kernels": [
+        {
+          "name": "_ZN5cudnn26bn_fw_inf_1C11_kernel_NCHWIffLb1ELi1EEEvT0_S1_17cudnnTensorStructPKT_S2_PS3_S2_PKS1_S8_S8_S8_S1_",
+          "count": 2300,
+          "count_per_iteration": 46.0,
+          "total_us": 12347.378999999999
+        },
+        {
+          "name": "_ZN2at6native29vectorized_elementwise_kernelILi4ENS0_11FillFunctorIfEESt5arrayIPcLy1EELb0EEEviT0_T1_",
+          "count": 3800,
+          "count_per_iteration": 76.0,
+          "total_us": 9623.517999999996
+        },
+        {
+          "name": "_ZN7cutlass7Kernel2I50cutlass_80_tensorop_s1688gemm_64x64_16x6_nn_align4EEvNT_6ParamsE",
+          "count": 650,
+          "count_per_iteration": 13.0,
+          "total_us": 7860.581000000001
+        },
+        {
+          "name": "_ZN2at6native51_GLOBAL__N__68a3d168_18_DepthwiseConv2d_cu_2ee6150b31conv_depthwise2d_forward_kernelILi3EfiEEvN5torch10he",
+          "count": 450,
+          "count_per_iteration": 9.0,
+          "total_us": 7530.876999999999
+        },
+        {
+          "name": "_ZN2at6native13reduce_kernelILi512ELi1ENS0_8ReduceOpIfNS0_7MeanOpsIffffEEjfLi4ELi4EEEEEvT1_",
+          "count": 800,
+          "count_per_iteration": 16.0,
+          "total_us": 5125.932000000009
+        },
+        {
+          "name": "_ZN2at6native51_GLOBAL__N__68a3d168_18_DepthwiseConv2d_cu_2ee6150b31conv_depthwise2d_forward_kernelILi5EfiEEvN5torch10he",
+          "count": 300,
+          "count_per_iteration": 6.0,
+          "total_us": 4822.421000000001
+        },
+        {
+          "name": "_ZN7cutlass7Kernel2I50cutlass_80_tensorop_s1688gemm_64x64_16x6_nn_align1EEvNT_6ParamsE",
+          "count": 300,
+          "count_per_iteration": 6.0,
+          "total_us": 3818.381000000001
+        },
+        {
+          "name": "_ZN7cutlass7Kernel2I50cutlass_80_tensorop_s1688gemm_64x64_32x6_nn_align4EEvNT_6ParamsE",
+          "count": 350,
+          "count_per_iteration": 7.0,
+          "total_us": 3672.7630000000054
+        },
+        {
+          "name": "_ZN2at6native18elementwise_kernelILi128ELi2EZNS0_22gpu_kernel_impl_nocastINS0_13BinaryFunctorIfffNS0_15binary_internal10",
+          "count": 750,
+          "count_per_iteration": 15.0,
+          "total_us": 3573.2929999999965
+        },
+        {
+          "name": "_ZN2at6native29vectorized_elementwise_kernelILi4EZZZNS0_49_GLOBAL__N__a62a4dcd_16_TensorCompare_cu_71e06f4e19launch_clam",
+          "count": 950,
+          "count_per_iteration": 19.0,
+          "total_us": 3519.382999999988
+        },
+        {
+          "name": "_ZN2at6native29vectorized_elementwise_kernelILi4ENS0_15CUDAFunctor_addIfEESt5arrayIPcLy3EELb0EEEviT0_T1_",
+          "count": 1300,
+          "count_per_iteration": 26.0,
+          "total_us": 3470.3449999999843
+        },
+        {
+          "name": "_ZN2at6native29vectorized_elementwise_kernelILi4EZZZNS0_66_GLOBAL__N__dd8fdf6c_28_ActivationHardswishKernel_cu_40bf2255_",
+          "count": 1050,
+          "count_per_iteration": 21.0,
+          "total_us": 3219.357999999995
+        },
+        {
+          "name": "_ZN8internal5gemvx6kernelIiiffffLb0ELb1ELb1ELb0ELi7ELb0E18cublasGemvParamsExIi30cublasGemvTensorStridedBatchedIKfES5_S3_",
+          "count": 400,
+          "count_per_iteration": 8.0,
+          "total_us": 2090.619
+        },
+        {
+          "name": "ampere_sgemm_128x32_nn",
+          "count": 100,
+          "count_per_iteration": 2.0,
+          "total_us": 1798.278999999999
+        },
+        {
+          "name": "_ZN8internal5gemvx6kernelIiiffffLb0ELb1ELb1ELb0ELi5ELb0E18cublasGemvParamsExIi30cublasGemvTensorStridedBatchedIKfES5_S3_",
+          "count": 50,
+          "count_per_iteration": 1.0,
+          "total_us": 1413.1309999999999
+        }
+      ]
+    }
+  },
+  "delta_kernel_launches_per_iteration": 28.0,
+  "delta_kernel_us_per_iteration": 362.89446,
+  "profiler_impact": {
+    "baseline": {
+      "before_ms": 4.828992999682669,
+      "after_ms": 6.032368999731261,
+      "drift_percent": 24.91981247700444
+    },
+    "eca_non_se": {
+      "before_ms": 5.577567000000272,
+      "after_ms": 7.272732499986887,
+      "drift_percent": 30.392561846169347
+    }
+  },
+  "note": "profiler 会引入额外 CPU/GPU 开销，单次墙钟不作为延迟结论；kernel 数按 50 次迭代归一。",
+  "measured_at": "2026-10-21T08:16:09.759217+00:00"
+}

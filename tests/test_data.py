@@ -16,6 +16,7 @@ from mobilenet_attention.data import (
     dataset_summary,
     stratified_split,
     targets_tensor,
+    transform_spec,
 )
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -100,3 +101,30 @@ def test_dataloader_batches(datasets):
     assert images.shape == (8, 3, 64, 64)
     assert labels.shape == (8,)
     assert labels.dtype == torch.int64
+
+
+def test_transform_spec_records_actual_chain():
+    spec = transform_spec(224, {"random_resized_crop_scale": [0.6, 1.0], "horizontal_flip": True})
+    train_ops = [op["op"] for op in spec["train"]]
+    eval_ops = [op["op"] for op in spec["eval"]]
+    assert train_ops == ["RandomResizedCrop", "RandomHorizontalFlip", "ToTensor", "Normalize"]
+    assert eval_ops == ["Resize", "ToTensor", "Normalize"]
+    assert spec["train"][0]["size"] == 224
+    assert spec["eval"][0]["size"] == [224, 224]
+    assert spec["train"][-1]["mean"] == [0.485, 0.456, 0.406]
+    assert spec["eval"][-1]["std"] == [0.229, 0.224, 0.225]
+
+
+def test_transform_spec_without_flip():
+    spec = transform_spec(128, {"horizontal_flip": False})
+    ops = [op["op"] for op in spec["train"]]
+    assert "RandomHorizontalFlip" not in ops
+    assert spec["train"][0]["size"] == 128
+
+
+def test_transform_spec_matches_built_transform():
+    """记录的变换链必须与真正构建的 Compose 顺序一致。"""
+    spec = transform_spec(96, {"horizontal_flip": True})
+    transform = build_train_transform(96, horizontal_flip=True)
+    built_names = [type(t).__name__ for t in transform.transforms]
+    assert built_names == [op["op"] for op in spec["train"]]

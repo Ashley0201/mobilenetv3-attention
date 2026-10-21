@@ -137,15 +137,22 @@ def load_checkpoint(path: str | Path, model: nn.Module, device: torch.device) ->
 
 
 def build_scheduler(
-    optimizer: torch.optim.Optimizer, epochs: int, warmup_epochs: int = 0, eta_min: float = 1e-6
+    optimizer: torch.optim.Optimizer,
+    epochs: int,
+    warmup_epochs: int = 0,
+    eta_min: float = 1e-6,
+    warmup_start_factor: float = 0.1,
 ) -> torch.optim.lr_scheduler.LRScheduler:
-    """余弦退火调度；warmup 阶段线性升高学习率，末尾保留 eta_min 避免学习率为 0。"""
+    """余弦退火调度；warmup 阶段线性升高学习率，末尾保留 eta_min 避免学习率为 0。
+
+    参数全部来自配置，避免调度策略只存在于代码而无法从快照复现。
+    """
     if warmup_epochs > 0:
         main = torch.optim.lr_scheduler.CosineAnnealingLR(
             optimizer, T_max=max(epochs - warmup_epochs, 1), eta_min=eta_min
         )
         warmup = torch.optim.lr_scheduler.LinearLR(
-            optimizer, start_factor=0.1, total_iters=warmup_epochs
+            optimizer, start_factor=warmup_start_factor, total_iters=warmup_epochs
         )
         return torch.optim.lr_scheduler.SequentialLR(
             optimizer, schedulers=[warmup, main], milestones=[warmup_epochs]

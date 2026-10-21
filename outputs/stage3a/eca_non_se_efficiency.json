@@ -1,0 +1,213 @@
+{
+  "model": "eca_non_se",
+  "attention": {
+    "type": "eca",
+    "placement": "non_se_blocks",
+    "gamma": 2.0,
+    "b": 1.0,
+    "inserted_blocks": [
+      {
+        "feature_index": 1,
+        "position": 1,
+        "channels": 16,
+        "kernel_size": 3
+      },
+      {
+        "feature_index": 2,
+        "position": 2,
+        "channels": 64,
+        "kernel_size": 3
+      },
+      {
+        "feature_index": 3,
+        "position": 2,
+        "channels": 72,
+        "kernel_size": 3
+      },
+      {
+        "feature_index": 7,
+        "position": 2,
+        "channels": 240,
+        "kernel_size": 5
+      },
+      {
+        "feature_index": 8,
+        "position": 2,
+        "channels": 200,
+        "kernel_size": 5
+      },
+      {
+        "feature_index": 9,
+        "position": 2,
+        "channels": 184,
+        "kernel_size": 5
+      },
+      {
+        "feature_index": 10,
+        "position": 2,
+        "channels": 184,
+        "kernel_size": 5
+      }
+    ],
+    "total_params": 29
+  },
+  "pretrained": "imagenet1k_v1",
+  "device": "cuda",
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "parameters": {
+    "total": 4214871,
+    "backbone": 2971981,
+    "classifier": 1242890,
+    "attention": 29
+  },
+  "model_size_mib": 16.171886444091797,
+  "flops": {
+    "batch_size": 1,
+    "input_size": 224,
+    "total_flops": 430654112,
+    "total_macs": 215327056,
+    "breakdown": {
+      "aten.convolution": 428170912,
+      "aten.addmm": 2483200
+    },
+    "convention": "torch.utils.flop_counter；理论值，非硬件实测"
+  },
+  "analytic_attention_overhead": {
+    "layers": [
+      {
+        "layer": "features.1.block.1",
+        "channels": 16,
+        "spatial": [
+          112,
+          112
+        ],
+        "kernel": 3,
+        "params": 3,
+        "gap_macs": 200704,
+        "conv1d_macs": 48,
+        "mul_macs": 200704,
+        "total_macs": 401456
+      },
+      {
+        "layer": "features.2.block.2",
+        "channels": 64,
+        "spatial": [
+          56,
+          56
+        ],
+        "kernel": 3,
+        "params": 3,
+        "gap_macs": 200704,
+        "conv1d_macs": 192,
+        "mul_macs": 200704,
+        "total_macs": 401600
+      },
+      {
+        "layer": "features.3.block.2",
+        "channels": 72,
+        "spatial": [
+          56,
+          56
+        ],
+        "kernel": 3,
+        "params": 3,
+        "gap_macs": 225792,
+        "conv1d_macs": 216,
+        "mul_macs": 225792,
+        "total_macs": 451800
+      },
+      {
+        "layer": "features.7.block.2",
+        "channels": 240,
+        "spatial": [
+          14,
+          14
+        ],
+        "kernel": 5,
+        "params": 5,
+        "gap_macs": 47040,
+        "conv1d_macs": 1200,
+        "mul_macs": 47040,
+        "total_macs": 95280
+      },
+      {
+        "layer": "features.8.block.2",
+        "channels": 200,
+        "spatial": [
+          14,
+          14
+        ],
+        "kernel": 5,
+        "params": 5,
+        "gap_macs": 39200,
+        "conv1d_macs": 1000,
+        "mul_macs": 39200,
+        "total_macs": 79400
+      },
+      {
+        "layer": "features.9.block.2",
+        "channels": 184,
+        "spatial": [
+          14,
+          14
+        ],
+        "kernel": 5,
+        "params": 5,
+        "gap_macs": 36064,
+        "conv1d_macs": 920,
+        "mul_macs": 36064,
+        "total_macs": 73048
+      },
+      {
+        "layer": "features.10.block.2",
+        "channels": 184,
+        "spatial": [
+          14,
+          14
+        ],
+        "kernel": 5,
+        "params": 5,
+        "gap_macs": 36064,
+        "conv1d_macs": 920,
+        "mul_macs": 36064,
+        "total_macs": 73048
+      }
+    ],
+    "total_params": 29,
+    "total_macs": 1575632,
+    "conv1d_macs_only": 4496,
+    "convention": "每元素一次乘或加记 1 MAC；形状来自真实前向钩子"
+  },
+  "latency": {
+    "batch_size": 1,
+    "input_size": 224,
+    "warmup": 10,
+    "repeats_per_run": 50,
+    "runs": [
+      5.578436000505462,
+      5.6889619992580265,
+      5.8314680005423725,
+      5.284110000357032,
+      5.577593999914825
+    ],
+    "mean_ms": 5.592114000115544,
+    "stdev_ms": 0.20120527726965334,
+    "min_ms": 5.284110000357032,
+    "max_ms": 5.8314680005423725,
+    "median_ms": 5.578436000505462
+  },
+  "gpu_state_before": {
+    "temperature_c": 48,
+    "sm_clock_mhz": 210,
+    "utilization_percent": 4,
+    "memory_used_mib": 1151
+  },
+  "gpu_state_after": {
+    "temperature_c": 52,
+    "sm_clock_mhz": 2250,
+    "utilization_percent": 24,
+    "memory_used_mib": 1197
+  },
+  "train_peak_memory_mib": 3108.0185546875,
+  "measured_at": "2026-10-21T07:41:16.310087+00:00"
+}

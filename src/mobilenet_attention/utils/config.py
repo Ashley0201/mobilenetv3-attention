@@ -29,12 +29,30 @@ def set_by_dotted_key(config: dict[str, Any], dotted_key: str, value: Any) -> No
     node[keys[-1]] = value
 
 
+def parse_scalar(raw: str) -> Any:
+    """把命令行字符串解析为 YAML 标量，修复布尔与 null 的类型错误。
+
+    yaml.safe_load("false") -> False，yaml.safe_load("null") -> None。
+    未加引号的普通字符串仍保持字符串，例如 "eca" -> "eca"。
+    """
+    try:
+        return yaml.safe_load(raw)
+    except yaml.YAMLError:
+        # 非法 YAML 标量（例如含冒号未加引号）按原始字符串处理
+        return raw
+
+
 def apply_overrides(config: dict[str, Any], overrides: dict[str, Any]) -> dict[str, Any]:
-    """返回应用覆盖项后的新配置，不修改输入。"""
+    """返回应用覆盖项后的新配置，不修改输入。
+
+    覆盖值若为字符串，先按 YAML 标量解析，避免 "--set training.amp=false"
+    被 bool("false") 判为 True，或 "grad_clip=null" 变成字符串 "null"。
+    键一旦出现即视为显式覆盖，因此 null 会真正写入 None。
+    """
     merged = deepcopy(config)
     for key, value in overrides.items():
-        if value is not None:
-            set_by_dotted_key(merged, key, value)
+        resolved = parse_scalar(value) if isinstance(value, str) else value
+        set_by_dotted_key(merged, key, resolved)
     return merged
 
 

@@ -31,6 +31,10 @@ training:
   device: auto
   # 仅冒烟测试使用：每轮只跑 10 个训练批次与 2 个验证批次
   limit_train_batches: 10
+  scheduler:
+    name: cosine
+    warmup_start_factor: 0.1
+    eta_min: 0.000001
 
 evaluation:
   monitor: val_accuracy
